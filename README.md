@@ -1,6 +1,6 @@
 # Biblioteca Virtual
 
-Este é um script simples em JavaScript que simula uma biblioteca virtual. Ele permite adicionar, remover e listar livros usando arrays e objetos.
+Este script em JavaScript representa uma implementação simples de uma biblioteca virtual, utilizando arrays e objetos para gerenciar operações como adição, remoção e listagem de livros.
 
 ## Funcionalidades
 
