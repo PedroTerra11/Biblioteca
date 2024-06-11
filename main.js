@@ -5,7 +5,7 @@ let opcao = 0;
 function mensagem(){
 console.log("Digite 1 para inserir um novo livro")
 console.log("Digite 2 para remover um livro")
-console.log("Digite 3 para visualizar os livros.")
+console.log("Digite 3 para visualizar os livros. \n")
 }
 
 mensagem()
@@ -17,29 +17,47 @@ process.stdin.on("data", function(data){
         if(opcao == 1){
             console.log("Digite o nome do livro:")
         }else if(opcao == 2){
-            console.log("Qual livro você deseja remover?")
-            console.log(biblioteca)
+            if(biblioteca.length > 0){
+                console.log("Qual livro você deseja remover? \n")
+                console.log(biblioteca)
+            } else{
+                console.log("\n Sem livros para excluir \n")
+                opcao = 0;
+                mensagem()
+            }
         }else
             console.log("Pressione enter para continuar")
     } else {
         switch (opcao) {
             case 1:
                 if(!livros.nome) {
-                    console.log("Digite o tamanho do livro:")
-                    livros.nome = entrada_usuario
+                    if(entrada_usuario.length > 3){
+                        console.log("Digite o tamanho do livro:")
+                        livros.nome = entrada_usuario
+                    }else
+                        console.log("Nome inválido")
                 } else if(!livros.tamanho){
-                    livros.tamanho = entrada_usuario
-                    console.log("Digite o Autor:")
+                    if(entrada_usuario > 0){
+                        livros.tamanho = entrada_usuario
+                        console.log("Digite o Autor:")
+                    } else
+                        console.log("Número de páginas inválidas.")
                 } else if(!livros.autor){
-                    livros.autor = entrada_usuario
-                    console.log("Digite o Gênero")
+                    if(entrada_usuario.length > 3){
+                        livros.autor = entrada_usuario
+                        console.log("Digite o Gênero")
+                    } else
+                        console.log("Nome do autor inválido")
                 } else {
-                    livros.genero = entrada_usuario 
-                    biblioteca.push(livros)
-                    livros = {}
-                    opcao = 0;
-                    console.log(" \n Livro inserido com sucesso! \n")
-                    mensagem()
+                    if(entrada_usuario.length > 3){
+                        livros.genero = entrada_usuario 
+                        biblioteca.push(livros)
+                        livros = {}
+                        opcao = 0;
+                        console.log(" \n Livro inserido com sucesso! \n")
+                        mensagem()
+                    } else
+                        console.log("Gênero inválido")
                 }
             break;
                 
@@ -48,7 +66,7 @@ process.stdin.on("data", function(data){
                 for(let i = 0; i < biblioteca.length; i++){
                     if(biblioteca[i].nome == entrada_usuario){
                         biblioteca.splice([i]) 
-                        console.log("Livro removido com sucesso!")
+                        console.log(" \n Livro removido com sucesso! \n")
                     } else
                         console.log("Livro inválido")
                 }
