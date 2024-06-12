@@ -8,9 +8,21 @@ console.log("Digite 2 para remover um livro")
 console.log("Digite 3 para visualizar os livros. \n")
 }
 
+
 mensagem()
 process.stdin.on("data", function(data){
     let entrada_usuario = data.toString().trim();
+    
+    function verificar(){
+        for(let i = 0; i < biblioteca.length; i++){
+            if(entrada_usuario == biblioteca[i].nome){
+            console.log(" \n Este livro já foi adicionado \n")
+                opcao = 0;
+                mensagem()
+                return true
+            }
+        }
+    }
 
     if(!opcao) {
         opcao = Number(entrada_usuario);
@@ -25,11 +37,14 @@ process.stdin.on("data", function(data){
                 opcao = 0;
                 mensagem()
             }
-        }else
+        }else if(opcao == 3){
             console.log("Pressione enter para continuar")
+        }else
+            console.log("Opção inválida")
     } else {
         switch (opcao) {
             case 1:
+                if(!verificar()){
                 if(!livros.nome) {
                     if(entrada_usuario.length > 3){
                         console.log("Digite o tamanho do livro:")
@@ -59,6 +74,7 @@ process.stdin.on("data", function(data){
                     } else
                         console.log("Gênero inválido")
                 }
+            }    
             break;
                 
             case 2:
@@ -68,7 +84,7 @@ process.stdin.on("data", function(data){
                         biblioteca.splice([i]) 
                         console.log(" \n Livro removido com sucesso! \n")
                     } else
-                        console.log("Livro inválido")
+                        console.log("Livro inválido \n")
                 }
             } else
                 console.log("Sem nenhum livro adicionado até o momento \n")
@@ -97,3 +113,4 @@ process.stdin.on("data", function(data){
         }
     }
 })
+
